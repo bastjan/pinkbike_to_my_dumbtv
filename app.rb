@@ -3,6 +3,8 @@ require 'open-uri'
 require 'sinatra'
 require 'nokogiri'
 
+set :bind, '0.0.0.0'
+
 def feed_to_linklist
 	url = 'http://www.pinkbike.com/pinkbike_xml_feed.php'
 
