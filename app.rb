@@ -21,17 +21,15 @@ def a(title, href: "#")
 	"<a href='#{href}'>#{title}</a>"
 end
 
-def redirect_to_video_file(page)
+def get_video_url_from_page(page)
 	url = "http://" + params[:captures].first
 
 	open(url) do |page|
 		page = Nokogiri::HTML(page)
 		video_link = page.css("video source[res='1080']")[0]['src']
 
-		redirect video_link
+		return video_link
 	end
-rescue
-	"Not a pinkbike video"
 end
 
 get '/' do
@@ -41,5 +39,7 @@ end
 get /\/item\/(.+)/ do
 	url = "http://" + params[:captures].first
 
-	redirect_to_video_file(url)
+	erb :item, locals: {
+		video_url: get_video_url_from_page(url)
+	}
 end

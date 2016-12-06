@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Video</title>
+</head>
+<body>
+	<a href="javascript:fullScreenAndPlay();false;">Fullscreen and Play</a>
+	<br>
+	<video id="video" src="<%= video_url %>"></video>
+
+	<script type="text/javascript">
+		fullScreenAndPlay = function() {
+			var videoContainer = document.getElementById("video");
+
+			if (videoContainer.requestFullscreen) {
+				videoContainer.requestFullscreen();
+			} else if (videoContainer.webkitRequestFullscreen) {
+				videoContainer.webkitRequestFullscreen();
+			} else if (videoContainer.mozRequestFullscreen) {
+				videoContainer.mozRequestFullscreen();
+			}
+
+			videoContainer.play();
+		}
+
+	</script>
+</body>
+</html>
